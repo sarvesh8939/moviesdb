@@ -1,0 +1,115 @@
+
+
+.content{
+    height: 90%;
+    width: 90%;
+    place-self: center;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, black 0%, #292929 50%);
+    display: flex;
+}
+
+.left{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.left h2{
+    width: 90%;
+    color: white;
+    font-family: "Quantico", sans-serif;
+    text-align: center;
+}
+
+.image{
+    width: 65%;
+    height: 65%;
+    border-radius: 10px;
+    /* border: 1px white solid; */
+}
+
+.image img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.rightdd{
+    height: 100%;
+    width: 60%;
+    border-radius: 0px 0px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.moviedata{
+    /* border: 1px white solid; */
+    color: #ebfffc;
+    width: 90%;
+    height: 20%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly
+}
+
+.moviedata h3{
+    font-family: "Quantico", sans-serif;
+}
+
+.moviedata p{
+     font-family: "PT Serif", serif;
+}
+
+@media (min-width:300px) and (max-width:420px){
+    .content{
+        width: 95%;
+        height: 95%;
+        flex-direction: column;
+        background-image: linear-gradient(to bottom, black 0%, #292929 55%);
+    }
+    .left{
+        width: 100%;
+        height: 40%;
+        /* border: 1px white solid; */
+    }
+    .image{
+        width: 65%;
+        height: 80%;
+    }
+    .rightdd{
+        width: 100%;
+        height: 60%;
+        /* border: 1px white solid; */
+    }
+    .left h2{
+        font-size: 1rem;
+    }
+
+    .moviedata{
+        align-items: initial;
+    }
+
+    .moviedata h3{
+        font-size: 1rem;
+        text-align: left;
+    }
+    .moviedata p{
+        font-size: 0.7rem;
+        text-align: left;
+    }
+}
+
+@media (min-width:600px) and (max-width:900px){
+    .image{
+        width: 80%;
+    }
+}
