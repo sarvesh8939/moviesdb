@@ -35,7 +35,7 @@ function Details() {
             <h3>Description</h3>
             <p>
               {moviedata
-                ? moviedata.short.description
+                ? moviedata.short.description || "No description available"
                 : "No description available"}
             </p>
           </div>
@@ -43,44 +43,40 @@ function Details() {
             <h3>Directer</h3>
             <p>
               {moviedata
-                ? moviedata.main.directors.length > 0
-                  ? moviedata.short.director.map(
+                ? moviedata.top.directorsPageTitle.length > 0
+                  ? moviedata.top.directorsPageTitle.map(
                       (d, index) =>
-                        d.name +
-                        (index < moviedata.short.director.length - 1
+                        d.credits[0].name.nameText.text +
+                        (index < moviedata.top.directorsPageTitle.length - 1
                           ? ", "
-                          : "")
+                          : "") || "No directer available"
                     )
-                  : moviedata.main.creators[0].credits.map(
-                      (c, index) =>
-                        c.name.nameText.text +
-                        (index < moviedata.main.creators[0].credits.length - 1
-                          ? "(creator), "
-                          : "(creator)")
-                    )
+                  : "No directer available"
                 : "No description available"}
             </p>
             <h3>Actors</h3>
             <p>
               {moviedata
-                ? moviedata.short.actor.map(
-                    (d, index) =>
-                      d.name +
-                      (index < moviedata.short.actor.length - 1 ? ", " : "")
-                  )
+                ? moviedata.main.castV2[0].credits.map(
+                    (n, index) =>
+                      n.name.nameText.text +
+                      (index < moviedata.main.castV2[0].credits.length - 1 ? ", " : "")
+                  ) || "No actors available"
                 : "No description available"}
             </p>
           </div>
           <div className="genre moviedata">
             <h3>Release Date</h3>
-            <p>{moviedata? moviedata.short.datePublished:"no data available"}</p>
+            <p>
+              {moviedata ? moviedata.short.datePublished || "no data available" : "no data available"}
+            </p>
             <h3>Genre</h3>
             <p>
               {moviedata
                 ? moviedata.short.genre.map(
                     (d, index) =>
                       d + (index < moviedata.short.genre.length - 1 ? ", " : "")
-                  )
+                  ) || "No genre available"
                 : "No description available"}
             </p>
             <p>{}</p>
@@ -88,11 +84,11 @@ function Details() {
           <div className="rating moviedata">
             <h3>Rating</h3>
             <p>
-              ⭐ 
+              ⭐
               {moviedata
                 ? moviedata.top.ratingsSummary.aggregateRating == null
                   ? "  not released"
-                  : moviedata.short.aggregateRating.ratingValue + "/10"
+                  : moviedata.short.aggregateRating.ratingValue + "/10" || "No rating available"
                 : "No data available"}
             </p>
             <p>
@@ -100,7 +96,7 @@ function Details() {
               {moviedata
                 ? moviedata.top.ratingsSummary.voteCount == 0
                   ? " 0"
-                  : moviedata.short.aggregateRating.ratingCount
+                  : ` ${moviedata.short.aggregateRating.ratingCount}` || "No rating count found"
                 : "No rating count found"}
             </p>
           </div>

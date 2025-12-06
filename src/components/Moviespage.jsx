@@ -12,7 +12,7 @@ function createMovieCard(movie) {
       key={movie["#IMDB_ID"]}
       id={movie["#IMDB_ID"]}
       thumb={movie["#IMG_POSTER"]}
-      actors={movie["#ACTORS"]}
+      actors={movie["#ACTORS"]} 
     />
   );
 }
