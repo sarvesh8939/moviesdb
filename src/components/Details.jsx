@@ -23,61 +23,63 @@ function Details() {
         <div className="left">
           <div className="image">
             <img
-              src={moviedata ? moviedata.short.image : "No image available"}
+              src={moviedata?.short?.image || "No image available"}
               alt="poster"
             />
           </div>
 
-          <h2>{moviedata ? moviedata.short.name : "No name available"}</h2>
+          <h2>{moviedata?.short?.name || "No name available"}</h2>
         </div>
         <div className="rightdd">
           <div className="description moviedata">
             <h3>Description</h3>
             <p>
-              {moviedata
-                ? moviedata.short.description || "No description available"
-                : "No description available"}
+              {moviedata?.short?.description || "No description available"}
             </p>
           </div>
           <div className="actors moviedata">
-            <h3>Directer</h3>
+            <h3>Director</h3>
             <p>
-              {moviedata
-                ? moviedata.top.directorsPageTitle.length > 0
-                  ? moviedata.top.directorsPageTitle.map(
-                      (d, index) =>
-                        d.credits[0].name.nameText.text +
-                        (index < moviedata.top.directorsPageTitle.length - 1
-                          ? ", "
-                          : "") || "No directer available"
-                    )
-                  : "No directer available"
-                : "No description available"}
+              {moviedata?.top?.directorsPageTitle?.length > 0
+                ? moviedata.top.directorsPageTitle.map(
+                    (d, index) =>
+                      (d.credits?.[0]?.name?.nameText?.text || "") +
+                      (index < moviedata.top.directorsPageTitle.length - 1
+                        ? ", "
+                        : "")
+                  )
+                : moviedata?.short?.director
+                ? moviedata.short.director.map(
+                    (d, index) =>
+                      d.name + 
+                      (index < moviedata.short.director.length - 1 ? ", " : "")
+                  )
+                : "No director available"}
             </p>
             <h3>Actors</h3>
             <p>
-              {moviedata
+              {moviedata?.main?.castV2?.[0]?.credits?.length > 0
                 ? moviedata.main.castV2[0].credits.map(
                     (n, index) =>
-                      n.name.nameText.text +
+                      (n.name?.nameText?.text || "") +
                       (index < moviedata.main.castV2[0].credits.length - 1 ? ", " : "")
-                  ) || "No actors available"
-                : "No description available"}
+                  )
+                : "No actors available"}
             </p>
           </div>
           <div className="genre moviedata">
             <h3>Release Date</h3>
             <p>
-              {moviedata ? moviedata.short.datePublished || "no data available" : "no data available"}
+              {moviedata?.short?.datePublished || "no data available"}
             </p>
             <h3>Genre</h3>
             <p>
-              {moviedata
+              {moviedata?.short?.genre?.length > 0
                 ? moviedata.short.genre.map(
                     (d, index) =>
                       d + (index < moviedata.short.genre.length - 1 ? ", " : "")
-                  ) || "No genre available"
-                : "No description available"}
+                  )
+                : "No genre available"}
             </p>
             <p>{}</p>
           </div>
@@ -85,19 +87,15 @@ function Details() {
             <h3>Rating</h3>
             <p>
               ⭐
-              {moviedata
-                ? moviedata.top.ratingsSummary.aggregateRating == null
-                  ? "  not released"
-                  : moviedata.short.aggregateRating.ratingValue + "/10" || "No rating available"
-                : "No data available"}
+              {moviedata?.top?.ratingsSummary?.aggregateRating == null
+                ? "  not released"
+                : (moviedata?.short?.aggregateRating?.ratingValue || "?") + "/10"}
             </p>
             <p>
               Rating Count:
-              {moviedata
-                ? moviedata.top.ratingsSummary.voteCount == 0
-                  ? " 0"
-                  : ` ${moviedata.short.aggregateRating.ratingCount}` || "No rating count found"
-                : "No rating count found"}
+              {moviedata?.top?.ratingsSummary?.voteCount
+                ? ` ${moviedata.short?.aggregateRating?.ratingCount}`
+                : " 0"}
             </p>
           </div>
         </div>

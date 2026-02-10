@@ -4,6 +4,8 @@ import Moviespage from "./components/Moviespage.jsx";
 import Details from "./components/Details.jsx";
 
 function App() {
+  const [moviedata, setMoviedata] = React.useState(null);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -11,7 +13,7 @@ function App() {
           path="/"
           element={
             <div className="app">
-              <Moviespage />
+              <Moviespage moviedata={moviedata} setMoviedata={setMoviedata} />
             </div>
           }
         />

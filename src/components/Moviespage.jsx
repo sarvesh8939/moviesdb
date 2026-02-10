@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import "../components/moviespage.css";
 import search_icon from "../assets/search_icon.png";
 import Card from "./Card";
@@ -17,20 +17,21 @@ function createMovieCard(movie) {
   );
 }
 
-function Moviespage() {
+function Moviespage({ moviedata, setMoviedata }) {
   const inputref = useRef();
-  const [moviedata, setmoviedata] = useState(null);
 
   async function searchMovie(movieName) {
     const url = `https://imdb.iamidiotareyoutoo.com/search?q=${movieName}`;
     const response = await fetch(url);
     const data = await response.json();
-    setmoviedata(data.description);
+    setMoviedata(data.description);
   }
   // console.log(moviedata);
 
   useEffect(() => {
+    if (!moviedata) {
       searchMovie("avengers");
+    }
   }, []);
 
   return (
@@ -42,6 +43,11 @@ function Moviespage() {
             ref={inputref}
             type="text"
             placeholder="Search for a movie..."
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                searchMovie(inputref.current.value);
+              }
+            }}
           />
           <img
             src={search_icon}
