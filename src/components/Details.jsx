@@ -2,20 +2,24 @@ import React, { useEffect, useState } from "react";
 import "../components/details.css";
 import { useParams } from "react-router-dom";
 
+import fallback_img from "../assets/fallback_img.png";
+
 function Details() {
   const { imdbid } = useParams();
   const [moviedata, setmoviedata] = useState(null);
+  const [imgSrc, setImgSrc] = useState(null);
 
   async function fetchMovieDetails(id) {
     const url = `https://imdb.iamidiotareyoutoo.com/search?tt=${id}`;
     const response = await fetch(url);
     const data = await response.json();
     setmoviedata(data);
+    setImgSrc(data?.short?.image);
   }
   
   useEffect(() => {
     fetchMovieDetails(imdbid);
-  }, []);
+  }, [imdbid]);
 
   return (
     <div className="app">
@@ -23,7 +27,8 @@ function Details() {
         <div className="left">
           <div className="image">
             <img
-              src={moviedata?.short?.image || "No image available"}
+              src={imgSrc || fallback_img}
+              onError={() => setImgSrc(fallback_img)}
               alt="poster"
             />
           </div>
